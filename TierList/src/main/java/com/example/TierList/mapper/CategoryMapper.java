@@ -7,14 +7,14 @@ public class CategoryMapper {
 
     public static CategoryDTO toDTO(Category category) {
         if (category == null) return null;
-        return new CategoryDTO(category.getId(), category.getName(), category.getDescrizione());
+        return new CategoryDTO(category.getId(), category.getCategoryName(), category.getDescrizione());
     }
 
     public static Category toEntity(CategoryDTO dto) {
         if (dto == null) return null;
         Category category = new Category();
         category.setId(dto.getId());
-        category.setName(dto.getName());
+        category.setCategoryName(dto.getCategoryName());
         category.setDescrizione(dto.getDescrizione());
         return category;
     }

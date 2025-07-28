@@ -1,41 +1,78 @@
 package com.example.TierList.service;
 
-
 import com.example.TierList.model.TierListElement;
 import com.example.TierList.repository.TierListElementRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class TierListElementService {
 
-private final TierListElementRepository tierListElementRepository;
+    private final TierListElementRepository tierListElementRepository;
 
-public List<TierListElement> findAll() {
-return tierListElementRepository.findAll();
-}
+    /**
+     * Recupera tutti i TierListElement.
+     * @return Una lista di tutti i TierListElement.
+     */
+    public List<TierListElement> getAllTierListElements() {
+        return tierListElementRepository.findAll();
+    }
 
-public List<TierListElementRepository> findByElementId(Long ElementId) {
-return tierListElementRepository.findByElementId(ElementId);
-}
+    /**
+     * Recupera un TierListElement tramite il suo ID.
+     * @param id L'ID del TierListElement.
+     * @return Un Optional contenente il TierListElement se trovato.
+     */
+    public Optional<TierListElement> getTierListElementById(Long id) {
+        return tierListElementRepository.findById(id);
+    }
 
-public List<TierListElementRepository> findByTierListId(Long tierListId) {
-return tierListElementRepository.findByTierListId(tierListId);
-}
+    /**
+     * Salva un nuovo TierListElement o aggiorna uno esistente.
+     * @param tierListElement L'oggetto TierListElement da salvare/aggiornare.
+     * @return Il TierListElement salvato/aggiornato.
+     */
+    public TierListElement saveTierListElement(TierListElement tierListElement) {
+        return tierListElementRepository.save(tierListElement);
+    }
 
-public TierListElement findById(Long id) {
-return tierListElementRepository.findById(id).orElseThrow(() -> new RuntimeException("Tierlistelement non trovata"));
-}
+    /**
+     * Elimina un TierListElement tramite il suo ID.
+     * @param id L'ID del TierListElement da eliminare.
+     */
+    public void deleteTierListElement(Long id) {
+        tierListElementRepository.deleteById(id);
+    }
 
-public TierListElement save(TierListElement tierListElement) {
-return tierListElementRepository.save(tierListElement);
-}
+    /**
+     * Recupera tutti i TierListElement appartenenti a una specifica TierList.
+     * @param tierlistId L'ID della TierList.
+     * @return Una lista di TierListElement di quella TierList.
+     */
+    public List<TierListElement> getTierListElementsByTierlistId(Long tierlistId) {
+        return tierListElementRepository.findByTierlist_Id(tierlistId);
+    }
 
-public void delete(Long id) {
-tierListElementRepository.deleteById(id);
-}
+    /**
+     * Recupera tutti i TierListElement che si riferiscono a un Element specifico.
+     * @param elementId L'ID dell'Element.
+     * @return Una lista di TierListElement che usano quell'Element.
+     */
+    public List<TierListElement> getTierListElementsByElementId(Long elementId) {
+        return tierListElementRepository.findByElement_Id(elementId);
+    }
 
+    /**
+     * Trova un TierListElement specifico per una data TierList e un dato Element.
+     * @param tierlistId L'ID della TierList.
+     * @param elementId L'ID dell'Element.
+     * @return Un Optional contenente il TierListElement se trovato.
+     */
+    public Optional<TierListElement> getTierListElementByTierlistAndElement(Long tierlistId, Long elementId) {
+        return tierListElementRepository.findByTierlist_IdAndElement_Id(tierlistId, elementId);
+    }
 }

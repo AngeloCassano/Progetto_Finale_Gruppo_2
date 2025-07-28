@@ -15,7 +15,7 @@ public class TierListMapper {
         dto.setUtenteId(tierList.getUtente().getId());
         dto.setUsername(tierList.getUtente().getUsername());
         dto.setCategoryId(tierList.getCategory().getId());
-        dto.setCategoryName(tierList.getCategory().getName());
+        dto.setCategoryName(tierList.getCategory().getCategoryName());
         return dto;
     }
 

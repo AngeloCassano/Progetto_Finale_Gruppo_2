@@ -13,7 +13,7 @@ public class ElementMapper {
         dto.setName(element.getName());
         dto.setImageUrl(element.getImageUrl());
         dto.setCategoryId(element.getCategory().getId());
-        dto.setCategoryName(element.getCategory().getName());
+        dto.setCategoryName(element.getCategory().getCategoryName());
         return dto;
     }
 
