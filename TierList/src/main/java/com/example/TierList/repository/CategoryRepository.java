@@ -1,11 +1,13 @@
 package com.example.TierList.repository;
 
+import java.util.Optional;
 
-import com.example.TierList.model.Category;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.example.TierList.model.Category;
+
 @Repository
-public interface CategoryRepository extends CrudRepository<Category, Integer> {
-    // Tutti i metodi CRUD già pronti!
+public interface CategoryRepository extends JpaRepository<Category, Long> {
+Optional<Category> findByCategoryName(String categoryName);
 }

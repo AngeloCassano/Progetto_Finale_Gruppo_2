@@ -24,7 +24,7 @@ public class TierList {
     
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private Utente user;
 
     @ManyToOne
     @JoinColumn(name = "categoria_id", nullable = false)
