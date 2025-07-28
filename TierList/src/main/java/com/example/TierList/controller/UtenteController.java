@@ -61,7 +61,7 @@ public class UtenteController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<?> delete(@PathVariable Long id) {
         return utenteRepository.findById(id)
                 .map(existing -> {
                     utenteRepository.delete(existing);

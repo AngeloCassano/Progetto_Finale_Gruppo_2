@@ -1,4 +1,4 @@
-package com.example.security.security;
+package com.example.TierList.security;
 
 import org.springframework.context.annotation.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
