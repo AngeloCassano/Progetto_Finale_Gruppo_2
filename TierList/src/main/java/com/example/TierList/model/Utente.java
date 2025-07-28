@@ -13,14 +13,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name ="user")
-public class User {
+@Table(name ="utente")
+public class Utente {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String username;
     private String password;
     private String ruolo;
+    private String refreshToken;
 
 }

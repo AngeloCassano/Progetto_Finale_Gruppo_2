@@ -23,8 +23,8 @@ public class TierList {
     private String titolo;
     
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "utente_id", nullable = false)
+    private Utente utente;
 
     @ManyToOne
     @JoinColumn(name = "categoria_id", nullable = false)
