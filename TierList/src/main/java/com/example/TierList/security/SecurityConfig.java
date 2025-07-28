@@ -1,6 +1,6 @@
-package com.example.security.security;
+package com.example.TierList.security;
 
-import com.example.security.service.CustomUserDetailsService;
+import com.example.TierList.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
