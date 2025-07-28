@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 public class Element {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String name;
     private String imageUrl;
 
