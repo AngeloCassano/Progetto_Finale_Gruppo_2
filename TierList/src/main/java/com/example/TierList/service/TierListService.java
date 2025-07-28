@@ -1,7 +1,10 @@
 package com.example.TierList.service;
 
 import com.example.TierList.model.TierList;
+import com.example.TierList.model.Utente;
 import com.example.TierList.repository.TierListRepository;
+import com.example.TierList.repository.UtenteRepository;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,7 @@ import java.util.Optional;
 public class TierListService {
 
     private final TierListRepository tierListRepository;
+    private final UtenteRepository utenteRepository;
 
     /**
      * Recupera tutte le TierList.
@@ -31,12 +35,9 @@ public class TierListService {
         return tierListRepository.findById(id);
     }
 
-    /**
-     * Salva una nuova TierList o aggiorna una esistente.
-     * @param tierList L'oggetto TierList da salvare/aggiornare.
-     * @return La TierList salvata/aggiornata.
-     */
-    public TierList saveTierList(TierList tierList) {
+    //creates or updates a new tier list
+    public TierList saveTierList(TierList tierList)
+    {
         return tierListRepository.save(tierList);
     }
 

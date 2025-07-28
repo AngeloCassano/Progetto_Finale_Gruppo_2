@@ -1,3 +1,8 @@
+application.properties
+
+### VS Code ###
+.vscode/
+
 # Compiled class file
 *.class
 
