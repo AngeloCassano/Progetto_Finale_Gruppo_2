@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,13 +21,13 @@ import com.example.TierList.model.Utente;
 import com.example.TierList.repository.UtenteRepository;
 
 @RestController
-@RequestMapping("/api/utenti")
+@RequestMapping("/user")
 public class UtenteController {
 
     @Autowired
     private UtenteRepository utenteRepository;
 
-    @GetMapping
+    @GetMapping //da togliere
     public List<UtenteDTO> getAll() {
         return utenteRepository.findAll()
                 .stream()
@@ -34,26 +35,20 @@ public class UtenteController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}") //da togliere
     public ResponseEntity<UtenteDTO> getById(@PathVariable Long id) {
         return utenteRepository.findById(id)
                 .map(u -> ResponseEntity.ok(UtenteMapper.toDTO(u)))
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
-    public UtenteDTO create(@RequestBody UtenteDTO dto) {
-        Utente utente = UtenteMapper.toEntity(dto);
-        Utente saved = utenteRepository.save(utente);
-        return UtenteMapper.toDTO(saved);
-    }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<UtenteDTO> update(@PathVariable Long id, @RequestBody UtenteDTO dto) {
         return utenteRepository.findById(id)
                 .map(existing -> {
                     existing.setUsername(dto.getUsername());
-                    existing.setRuolo(dto.getRuolo());
                     Utente updated = utenteRepository.save(existing);
                     return ResponseEntity.ok(UtenteMapper.toDTO(updated));
                 })
@@ -69,4 +64,9 @@ public class UtenteController {
                 })
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    @GetMapping("/info")
+    public String infoUtente(Authentication auth) {
+    return "Ciao " + auth.getName() + ", sei autenticato come USER o ADMIN.";
+}
 }
