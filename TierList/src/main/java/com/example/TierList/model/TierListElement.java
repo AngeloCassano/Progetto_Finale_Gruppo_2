@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 public class TierListElement {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     
     @ManyToOne
     @JoinColumn(name = "element_id", nullable = false)

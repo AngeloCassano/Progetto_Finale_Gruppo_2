@@ -19,12 +19,12 @@ import lombok.NoArgsConstructor;
 public class TierList {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String titolo;
     
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private Utente user;
 
     @ManyToOne
     @JoinColumn(name = "categoria_id", nullable = false)
