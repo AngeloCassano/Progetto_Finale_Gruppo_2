@@ -1,7 +1,7 @@
 package com.example.TierList.service;
 
 import com.example.TierList.model.TierList;
-import com.example.TierList.model.Utente;
+import com.example.TierList.model.TierUser;
 import com.example.TierList.repository.TierListRepository;
 import com.example.TierList.repository.UtenteRepository;
 

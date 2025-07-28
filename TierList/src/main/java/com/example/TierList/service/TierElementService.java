@@ -1,6 +1,6 @@
 package com.example.TierList.service;
 
-import com.example.TierList.model.TierListElement;
+import com.example.TierList.model.TierElement;
 import com.example.TierList.repository.TierListElementRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class TierListElementService {
+public class TierElementService {
 
     private final TierListElementRepository tierListElementRepository;
 
@@ -18,7 +18,7 @@ public class TierListElementService {
      * Recupera tutti i TierListElement.
      * @return Una lista di tutti i TierListElement.
      */
-    public List<TierListElement> getAllTierListElements() {
+    public List<TierElement> getAllTierListElements() {
         return tierListElementRepository.findAll();
     }
 
@@ -27,7 +27,7 @@ public class TierListElementService {
      * @param id L'ID del TierListElement.
      * @return Un Optional contenente il TierListElement se trovato.
      */
-    public Optional<TierListElement> getTierListElementById(Long id) {
+    public Optional<TierElement> getTierListElementById(Long id) {
         return tierListElementRepository.findById(id);
     }
 
@@ -36,7 +36,7 @@ public class TierListElementService {
      * @param tierListElement L'oggetto TierListElement da salvare/aggiornare.
      * @return Il TierListElement salvato/aggiornato.
      */
-    public TierListElement saveTierListElement(TierListElement tierListElement) {
+    public TierElement saveTierListElement(TierElement tierListElement) {
         return tierListElementRepository.save(tierListElement);
     }
 
@@ -53,7 +53,7 @@ public class TierListElementService {
      * @param tierlistId L'ID della TierList.
      * @return Una lista di TierListElement di quella TierList.
      */
-    public List<TierListElement> getTierListElementsByTierlistId(Long tierlistId) {
+    public List<TierElement> getTierListElementsByTierlistId(Long tierlistId) {
         return tierListElementRepository.findByTierlist_Id(tierlistId);
     }
 
@@ -62,7 +62,7 @@ public class TierListElementService {
      * @param elementId L'ID dell'Element.
      * @return Una lista di TierListElement che usano quell'Element.
      */
-    public List<TierListElement> getTierListElementsByElementId(Long elementId) {
+    public List<TierElement> getTierListElementsByElementId(Long elementId) {
         return tierListElementRepository.findByElement_Id(elementId);
     }
 
@@ -72,7 +72,7 @@ public class TierListElementService {
      * @param elementId L'ID dell'Element.
      * @return Un Optional contenente il TierListElement se trovato.
      */
-    public Optional<TierListElement> getTierListElementByTierlistAndElement(Long tierlistId, Long elementId) {
+    public Optional<TierElement> getTierListElementByTierlistAndElement(Long tierlistId, Long elementId) {
         return tierListElementRepository.findByTierlist_IdAndElement_Id(tierlistId, elementId);
     }
 }

@@ -3,7 +3,7 @@ package com.example.TierList.mapper;
 import com.example.TierList.dto.TierListDTO;
 import com.example.TierList.model.Category;
 import com.example.TierList.model.TierList;
-import com.example.TierList.model.Utente;
+import com.example.TierList.model.TierUser;
 
 public class TierListMapper
 {
@@ -14,8 +14,8 @@ public class TierListMapper
         dto.setTitolo(tierList.getTitolo());
         dto.setUtenteId(tierList.getUtente().getId());
         dto.setUsername(tierList.getUtente().getUsername());
-        dto.setCategoryId(tierList.getCategory().getId());
-        dto.setCategoryName(tierList.getCategory().getCategoryName());
+        dto.setCategoryId(tierList.getTierElement().getId());
+        dto.setCategoryName(tierList.getTierElement().getName());
         return dto;
     }
 
@@ -25,10 +25,10 @@ public class TierListMapper
 
         TierList tierList = new TierList();
 
-        Utente utente = null;
+        TierUser utente = null;
 
         if (dto.getUtenteId() != null) {
-            utente = new Utente();
+            utente = new TierUser();
             utente.setId(dto.getUtenteId());
         }
 
@@ -40,9 +40,9 @@ public class TierListMapper
         }
 
         tierList.setId(dto.getId());
-        tierList.setTitolo(dto.getTitolo());
-        tierList.setUtente(utente);
-        tierList.setCategory(category);
+        tierList.setTitle(dto.getTitolo());
+        tierList.setUser(utente);
+        tierList.setTierElement(category);
         return tierList;
     }
 }

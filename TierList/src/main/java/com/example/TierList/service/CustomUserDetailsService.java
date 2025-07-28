@@ -1,6 +1,6 @@
 package com.example.TierList.service;
 
-import com.example.TierList.model.Utente;
+import com.example.TierList.model.TierUser;
 import com.example.TierList.repository.UtenteRepository;
 
 import org.springframework.security.core.userdetails.*;
@@ -17,13 +17,13 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Utente u = repo.findByUsername(username)
+        TierUser u = repo.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Utente non trovato"));
 
         return User.builder()
                 .username(u.getUsername())
                 .password(u.getPassword())
-                .roles(u.getRuolo().toString()) // es. "USER"
+                .roles(u.getRole().toString()) // es. "USER"
                 .build();
     }
 }

@@ -15,8 +15,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "element")
-public class Element {
+@Table(name = "images")
+public class Image
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,7 +25,6 @@ public class Element {
     private String imageUrl;
 
     @ManyToOne
-    @JoinColumn(name = "category_id", nullable = false)
-    private Category category;
-
+    @JoinColumn(name = "tierElement_id", nullable = false)
+    private TierElement tierElement;
 }

@@ -1,14 +1,14 @@
 package com.example.TierList.mapper;
 
 import com.example.TierList.dto.TierListElementDTO;
-import com.example.TierList.model.Element;
+import com.example.TierList.model.Image;
 import com.example.TierList.model.TierList;
-import com.example.TierList.model.TierListElement;
+import com.example.TierList.model.TierElement;
 
 public class TierListElementMapper {
 
 
-    public static TierListElementDTO toDTO(TierListElement entity) {
+    public static TierListElementDTO toDTO(TierElement entity) {
         if (entity == null) return null;
 
         TierListElementDTO dto = new TierListElementDTO();
@@ -17,23 +17,23 @@ public class TierListElementMapper {
         dto.setTierListId(entity.getTierlist().getId());
         dto.setTierListTitle(entity.getTierlist().getTitolo());
 
-        dto.setElementId(entity.getElement().getId());
-        dto.setElementName(entity.getElement().getName());
-        dto.setImageUrl(entity.getElement().getImageUrl());
+        dto.setElementId(entity.getCategory().getId());
+        dto.setElementName(entity.getCategory().getName());
+        dto.setImageUrl(entity.getCategory().getImageUrl());
 
-        dto.setTierName(entity.getTierName());
+        dto.setTierName(entity.getName());
         return dto;
     }
 
 
-    public static TierListElement toEntity(TierListElementDTO dto, TierList tierList, Element element) {
+    public static TierElement toEntity(TierListElementDTO dto, TierList tierList, Image element) {
         if (dto == null) return null;
 
-        TierListElement tle = new TierListElement();
+        TierElement tle = new TierElement();
         tle.setId(dto.getId());
         tle.setTierlist(tierList);
-        tle.setElement(element);
-        tle.setTierName(dto.getTierName());
+        tle.setTierElement(element);
+        tle.setName(dto.getTierName());
         return tle;
     }
 }

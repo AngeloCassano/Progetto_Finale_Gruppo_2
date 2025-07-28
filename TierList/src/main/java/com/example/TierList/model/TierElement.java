@@ -17,22 +17,20 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "tierlistelement")
-public class TierListElement {
+@Table(name = "tier_elements")
+public class TierElement {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @Enumerated(EnumType.STRING)
+    private TierNameType name;
+
     @ManyToOne
-    @JoinColumn(name = "element_id", nullable = false)
-    private Element element;
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
     
     @ManyToOne
     @JoinColumn(name = "tierlist_id", nullable = false)
     private TierList tierlist;
-
-    @Enumerated(EnumType.STRING)
-    private TierNameType tierName;
-
-
 }

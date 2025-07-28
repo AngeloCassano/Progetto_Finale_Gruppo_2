@@ -1,21 +1,21 @@
 package com.example.TierList.mapper;
 
 import com.example.TierList.dto.UtenteDTO;
-import com.example.TierList.model.Utente;
+import com.example.TierList.model.TierUser;
 
 public class UtenteMapper {
 
-    public static UtenteDTO toDTO(Utente utente) {
+    public static UtenteDTO toDTO(TierUser utente) {
         if (utente == null) return null;
-        return new UtenteDTO(utente.getId(), utente.getUsername(), utente.getRuolo());
+        return new UtenteDTO(utente.getId(), utente.getUsername(), utente.getRole());
     }
 
-    public static Utente toEntity(UtenteDTO dto) {
+    public static TierUser toEntity(UtenteDTO dto) {
         if (dto == null) return null;
-        Utente utente = new Utente();
+        TierUser utente = new TierUser();
         utente.setId(dto.getId());
         utente.setUsername(dto.getUsername());
-        utente.setRuolo(dto.getRuolo());
+        utente.setRole(dto.getRuolo());
         return utente;
     }
 }

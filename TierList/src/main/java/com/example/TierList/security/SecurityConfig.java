@@ -11,8 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.example.TierList.service.CustomUserDetailsService;
-
 /**
  * Configura la sicurezza dell'applicazione:
  * - Imposta il filtro JWT per le richieste

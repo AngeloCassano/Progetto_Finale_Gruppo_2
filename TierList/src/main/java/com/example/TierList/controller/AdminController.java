@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.TierList.dto.UtenteDTO;
 import com.example.TierList.mapper.UtenteMapper;
-import com.example.TierList.model.Utente;
+import com.example.TierList.model.TierUser;
 import com.example.TierList.repository.UtenteRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -52,7 +52,7 @@ public class AdminController
         return utenteRepository.findById(id)
                 .map(existing -> {
                     existing.setUsername(dto.getUsername());
-                    Utente updated = utenteRepository.save(existing);
+                    TierUser updated = utenteRepository.save(existing);
                     return ResponseEntity.ok(UtenteMapper.toDTO(updated));
                 })
                 .orElse(ResponseEntity.notFound().build());

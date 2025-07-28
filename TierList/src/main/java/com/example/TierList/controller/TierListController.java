@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.TierList.dto.TierListDTO;
 import com.example.TierList.mapper.TierListMapper;
 import com.example.TierList.model.TierList;
-import com.example.TierList.model.Utente;
+import com.example.TierList.model.TierUser;
 import com.example.TierList.service.JwtService;
 import com.example.TierList.service.TierListService;
 import com.example.TierList.service.UtenteService;
@@ -38,7 +38,7 @@ public class TierListController
         String username = jwtService.extractUsername(token);
 
         // ✅ Trova utente dal DB
-        Utente userCreator = utenteService.getUtenteByUsername(username)
+        TierUser userCreator = utenteService.getUtenteByUsername(username)
                 .orElseThrow(() -> new RuntimeException("Utente non trovato"));
 
         // ✅ Crea tier list

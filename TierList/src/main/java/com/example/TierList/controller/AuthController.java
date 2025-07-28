@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.TierList.dto.AuthRequest;
 import com.example.TierList.dto.AuthResponse;
 import com.example.TierList.dto.RegisterRequest;
-import com.example.TierList.model.Utente;
+import com.example.TierList.model.TierUser;
 import com.example.TierList.repository.UtenteRepository;
 import com.example.TierList.service.CustomUserDetailsService;
 import com.example.TierList.service.JwtService;
@@ -58,7 +58,7 @@ public class AuthController {
         String refreshToken = UUID.randomUUID().toString();
 
         // Salva il refresh token nel DB
-        Utente u = utenteRepository.findByUsername(user.getUsername()).get();
+        TierUser u = utenteRepository.findByUsername(user.getUsername()).get();
         u.setRefreshToken(refreshToken);
         utenteRepository.save(u);
 
@@ -70,7 +70,7 @@ public class AuthController {
     public ResponseEntity<AuthResponse> refresh(@RequestBody Map<String, String> request) {
         String refreshToken = request.get("refreshToken");
 
-        Utente u = utenteRepository.findAll().stream()
+        TierUser u = utenteRepository.findAll().stream()
                 .filter(user -> refreshToken.equals(user.getRefreshToken()))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Refresh token non valido"));
@@ -104,10 +104,10 @@ public class AuthController {
                     .body("Username giÃ  registrato");
         }
 
-        Utente nuovo = new Utente();
+        TierUser nuovo = new TierUser();
         nuovo.setUsername(request.getUsername());
         nuovo.setPassword(passwordEncoder.encode(request.getPassword()));
-        nuovo.setRuolo(request.getRuolo());
+        nuovo.setRole(request.getRuolo());
 
         utenteRepository.save(nuovo);
 
