@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name ="user")
+@Table(name ="utente")
 public class Utente {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
