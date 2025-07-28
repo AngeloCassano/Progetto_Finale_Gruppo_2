@@ -1,5 +1,6 @@
 package com.example.TierList.service;
 
+import com.example.TierList.model.TierList;
 import com.example.TierList.model.TierListElement;
 import com.example.TierList.repository.TierListRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +28,7 @@ return tierListRepository.findByCatgoryId(CategoryId);
 }
 
 public TierList findById(Long id) {
-return tierListrepository.findById(id).orElseThrow(() -> new RuntimeException("Tierlist non trovata"));
+return tierListRepository.findById(id).orElseThrow(() -> new RuntimeException("Tierlist non trovata"));
 }
 
 public TierList save(TierList tierList) {
