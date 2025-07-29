@@ -38,14 +38,4 @@ public class ElementService {
     public List<Element> searchElementsByName(String name) {
         return elementRepository.findByNameContainingIgnoreCase(name);
     }
-
-    // Metodo per cercare tutti gli elementi tramite categoria 
-    public List<Element> getElementsByCategoryId(Long categoryId) {
-        return elementRepository.findByCategory_Id(categoryId);
-    }
-
-    // Metodo per cercare un elemento tramite nome e categoria
-    public Optional<Element> getElementByNameAndCategoryId(String name, Long categoryId) {
-        return elementRepository.findByNameAndCategory_Id(name, categoryId);
-    }
 }

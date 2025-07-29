@@ -35,23 +35,6 @@ public class ElementController {
         return ResponseEntity.ok(elementService.searchElementsByName(name));
     }
 
-    // 🔎 GET: per categoryId
-    @GetMapping("/category/{categoryId}")
-    public ResponseEntity<List<Element>> getElementsByCategory(@PathVariable Long categoryId) {
-        return ResponseEntity.ok(elementService.getElementsByCategoryId(categoryId));
-    }
-
-    // 🔎 GET: per nome + categoryId
-    @GetMapping("/check")
-    public ResponseEntity<Element> getElementByNameAndCategoryId(
-            @RequestParam String name,
-            @RequestParam Long categoryId
-    ) {
-        return elementService.getElementByNameAndCategoryId(name, categoryId)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
-
     // ➕ POST: salva nuovo elemento
     @PostMapping
     public ResponseEntity<Element> saveElement(@RequestBody Element element) {

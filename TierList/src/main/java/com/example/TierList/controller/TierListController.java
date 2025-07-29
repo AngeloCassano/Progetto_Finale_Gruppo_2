@@ -102,18 +102,6 @@ public class TierListController {
     }
 
     /**
-     * Recupera tutte le TierList associate a una specifica categoria.
-     * GET /api/tierlists/by-category/{categoryId}
-     * @param categoryId L'ID della categoria.
-     * @return Una lista di TierList associate alla categoria specificata.
-     */
-    @GetMapping("/by-category/{categoryId}")
-    public ResponseEntity<List<TierList>> getTierListsByCategoryId(@PathVariable Long categoryId) {
-        List<TierList> tierLists = tierListService.getTierListsByCategoryId(categoryId);
-        return new ResponseEntity<>(tierLists, HttpStatus.OK);
-    }
-
-    /**
      * Cerca TierList per titolo (case-insensitive).
      * GET /api/tierlists/search-by-title
      * @param titolo Il titolo da cercare.
@@ -126,18 +114,5 @@ public class TierListController {
                        .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    /**
-     * Recupera le TierList di un utente specifico appartenenti a una certa categoria.
-     * GET /api/tierlists/by-user-and-category
-     * @param utenteId L'ID dell'utente.
-     * @param categoryId L'ID della categoria.
-     * @return Una lista di TierList che corrispondono ai criteri.
-     */
-    @GetMapping("/by-user-and-category")
-    public ResponseEntity<List<TierList>> getTierListsByUtenteAndCategory(
-            @RequestParam Long utenteId,
-            @RequestParam Long categoryId) {
-        List<TierList> tierLists = tierListService.getTierListsByUtenteAndCategory(utenteId, categoryId);
-        return new ResponseEntity<>(tierLists, HttpStatus.OK);
-    }
+
 }

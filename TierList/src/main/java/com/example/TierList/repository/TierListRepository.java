@@ -17,7 +17,4 @@ public interface TierListRepository extends JpaRepository<TierList, Long> {
 
     // Trova TierList per titolo (case-insensitive)
     Optional<TierList> findByTitoloContainingIgnoreCase(String titolo);
-
-    // Trova TierList per utente e categoria
-    List<TierList> findByUtente_IdAndCategory_Id(Long utenteId, Long categoryId);
 }

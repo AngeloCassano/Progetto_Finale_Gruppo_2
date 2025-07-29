@@ -49,8 +49,4 @@ public class TierListService {
         return tierListRepository.findByTitoloContainingIgnoreCase(titolo);
     }
 
-    // Metodo per ottenere una tierlist tramite utente e categoria
-    public List<TierList> getTierListsByUtenteAndCategory(Long utenteId, Long categoryId) {
-        return tierListRepository.findByUtente_IdAndCategory_Id(utenteId, categoryId);
-    }
 }

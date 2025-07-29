@@ -9,7 +9,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,23 +25,6 @@ public class UtenteController {
 
     @Autowired
     private UtenteRepository utenteRepository;
-
-    /*@GetMapping //da togliere
-    public List<UtenteDTO> getAll() {
-        return utenteRepository.findAll()
-                .stream()
-                .map(UtenteMapper::toDTO)
-                .collect(Collectors.toList());
-    }
-
-    @GetMapping("/{id}") //da togliere
-    public ResponseEntity<UtenteDTO> getById(@PathVariable Long id) {
-        return utenteRepository.findById(id)
-                .map(u -> ResponseEntity.ok(UtenteMapper.toDTO(u)))
-                .orElse(ResponseEntity.notFound().build());
-    }*/
-
-
 
     @PutMapping("/{id}")
     public ResponseEntity<UtenteDTO> update(@PathVariable Long id, @RequestBody UtenteDTO dto) {
@@ -67,6 +49,6 @@ public class UtenteController {
 
     @GetMapping("/info")
     public String infoUtente(Authentication auth) {
-    return "Ciao " + auth.getName() + ", sei autenticato come USER o ADMIN.";
-}
+        return "Ciao " + auth.getName() + ", sei autenticato come USER o ADMIN.";
+    }
 }

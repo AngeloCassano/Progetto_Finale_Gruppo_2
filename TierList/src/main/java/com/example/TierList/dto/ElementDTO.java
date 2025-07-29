@@ -11,6 +11,4 @@ public class ElementDTO {
     private Long id;
     private String name;
     private String imageUrl;
-    private Long categoryId;
-    private String categoryName;   
 }

@@ -23,10 +23,10 @@ public class JwtService {
     private long expiration;
 
     /**
-      Genera un token JWT per l'utente autenticato.
-      - Inserisce lo username come subject
-      - Inserisce i ruoli come claim
-      - Firma il token con algoritmo HS256 usando la chiave segreta
+     * Genera un token JWT per l'utente autenticato.
+     * - Inserisce lo username come subject
+     * - Inserisce i ruoli come claim
+     * - Firma il token con algoritmo HS256 usando la chiave segreta
      */
     public String generateToken(UserDetails user) {
         return Jwts.builder()
@@ -39,16 +39,16 @@ public class JwtService {
     }
 
     /**
-      Estrae lo username (subject) da un token JWT.
+     * Estrae lo username (subject) da un token JWT.
      */
     public String extractUsername(String token) {
         return getClaims(token).getSubject();
     }
 
     /**
-      Verifica se un token è valido per un determinato utente.
-      - Lo username del token deve corrispondere a quello dell'utente
-      - Il token non deve essere scaduto
+     * Verifica se un token è valido per un determinato utente.
+     * - Lo username del token deve corrispondere a quello dell'utente
+     * - Il token non deve essere scaduto
      */
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
@@ -56,8 +56,8 @@ public class JwtService {
     }
 
     /**
-      Estrae tutti i claims (contenuto) da un token JWT.
-      - Serve per leggere subject, expiration, claims personalizzati, ecc.
+     * Estrae tutti i claims (contenuto) da un token JWT.
+     * - Serve per leggere subject, expiration, claims personalizzati, ecc.
      */
     private Claims getClaims(String token) {
         return Jwts.parserBuilder()
@@ -67,8 +67,8 @@ public class JwtService {
             .getBody(); // Restituisce il contenuto (claims)
     }
 
-    /*
-      Verifica se un token JWT è scaduto.
+    /**
+     * Verifica se un token JWT è scaduto.
      */
     private boolean isExpired(String token) {
         return getClaims(token).getExpiration().before(new Date());
