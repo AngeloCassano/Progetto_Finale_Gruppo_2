@@ -1,0 +1,22 @@
+.app-container {
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.app-title {
+  font-size: 1.875rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.tier-lists-section {
+  margin-top: 32px;
+}
+
+.tier-lists-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
