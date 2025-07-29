@@ -14,52 +14,39 @@ import java.util.Optional;
 public class UtenteService {
 
     private final UtenteRepository utenteRepository;
-    private final PasswordEncoder passwordEncoder; // Richiede Spring Security
-
-    // Se non usi Spring Security per l'hashing, puoi rimuovere il PasswordEncoder
-    // e il suo uso nel costruttore e nel metodo saveUtente.
-    // CONSIGLIO VIVAMENTE DI USARLO PER LA SICUREZZA DELLE PASSWORD.
-    // Se non lo hai ancora aggiunto al pom.xml, fallo:
-    /*
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-security</artifactId>
-    </dependency>
-    */
-    // E definisci il bean PasswordEncoder in una classe @Configuration.
-
+    private final PasswordEncoder passwordEncoder; 
 
     /**
-     * Recupera tutti gli utenti.
-     * @return Una lista di tutti gli Utente.
+      Recupera tutti gli utenti.
+      @return Una lista di tutti gli Utente.
      */
     public List<Utente> getAllUtenti() {
         return utenteRepository.findAll();
     }
 
     /**
-     * Recupera un utente tramite il suo ID.
-     * @param id L'ID dell'utente.
-     * @return Un Optional contenente l'Utente se trovato.
+      Recupera un utente tramite il suo ID.
+      @param id L'ID dell'utente.
+      @return Un Optional contenente l'Utente se trovato.
      */
     public Optional<Utente> getUtenteById(Long id) {
         return utenteRepository.findById(id);
     }
 
     /**
-     * Recupera un utente tramite il suo username.
-     * @param username Lo username dell'utente.
-     * @return Un Optional contenente l'Utente se trovato.
+      Recupera un utente tramite il suo username.
+      @param username Lo username dell'utente.
+      @return Un Optional contenente l'Utente se trovato.
      */
     public Optional<Utente> getUtenteByUsername(String username) {
         return utenteRepository.findByUsername(username);
     }
 
     /**
-     * Salva un nuovo utente o aggiorna uno esistente.
-     * Hashing della password per sicurezza.
-     * @param utente L'oggetto Utente da salvare/aggiornare.
-     * @return L'Utente salvato/aggiornato.
+      Salva un nuovo utente o aggiorna uno esistente.
+      Hashing della password per sicurezza.
+      @param utente L'oggetto Utente da salvare/aggiornare.
+      @return L'Utente salvato/aggiornato.
      */
     public Utente saveUtente(Utente utente) {
         // Hashing della password PRIMA di salvarla
@@ -67,19 +54,16 @@ public class UtenteService {
         return utenteRepository.save(utente);
     }
 
-    /**
-     * Elimina un utente tramite il suo ID.
-     * @param id L'ID dell'utente da eliminare.
-     */
+    
+    // Elimina un utente tramite il suo ID.
+    
     public void deleteUtente(Long id) {
         utenteRepository.deleteById(id);
     }
 
-    /**
-     * Verifica se un username esiste già.
-     * @param username Lo username da controllare.
-     * @return true se l'username esiste, false altrimenti.
-     */
+    
+    // Verifica se un username esiste già.
+     
     public boolean existsUtenteByUsername(String username) {
         return utenteRepository.existsByUsername(username);
     }
