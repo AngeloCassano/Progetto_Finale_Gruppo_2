@@ -27,7 +27,7 @@ public class UtenteController {
     @Autowired
     private UtenteRepository utenteRepository;
 
-    @GetMapping //da togliere
+    /*@GetMapping //da togliere
     public List<UtenteDTO> getAll() {
         return utenteRepository.findAll()
                 .stream()
@@ -40,7 +40,7 @@ public class UtenteController {
         return utenteRepository.findById(id)
                 .map(u -> ResponseEntity.ok(UtenteMapper.toDTO(u)))
                 .orElse(ResponseEntity.notFound().build());
-    }
+    }*/
 
 
 
