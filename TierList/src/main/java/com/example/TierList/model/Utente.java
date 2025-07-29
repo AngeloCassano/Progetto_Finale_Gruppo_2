@@ -22,5 +22,6 @@ public class Utente {
     private String username;
     private String password;
     private String ruolo;
+    private String refreshToken;
 
 }
