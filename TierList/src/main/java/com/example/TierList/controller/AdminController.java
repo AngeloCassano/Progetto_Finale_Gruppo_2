@@ -28,7 +28,7 @@ public class AdminController {
         return "Benvenuto " + auth.getName() + ", sei un ADMIN.";
     }
 
-    @GetMapping
+    @GetMapping("/listaUser")
     public List<UtenteDTO> getAll() {
         return utenteRepository.findAll()
                 .stream()
@@ -36,7 +36,7 @@ public class AdminController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/listaUser/{id}")
     public ResponseEntity<UtenteDTO> getById(@PathVariable Long id) {
         return utenteRepository.findById(id)
                 .map(u -> ResponseEntity.ok(UtenteMapper.toDTO(u)))
