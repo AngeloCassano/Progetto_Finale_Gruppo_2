@@ -2,7 +2,10 @@ package com.example.TierList.model;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,22 +21,23 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "tierlist")
-public class TierList {
+@Table(name = "tierlistelement")
+public class TierListElement {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
-    private String titolo;
+    
+   
+    @OneToMany(mappedBy = "tierList", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Element> element;
+
     
     @ManyToOne
-    @JoinColumn(name = "utente_id", nullable = false)
-    private Utente utente;
+    @JoinColumn(name = "tierlist_id", nullable = false)
+    private TierList tierlist;
 
-    @ManyToOne
-    @JoinColumn(name = "categoria_id", nullable = false)
-    private Category category;
+    @Enumerated(EnumType.STRING)
+    private TierNameType tierName;
 
-    @OneToMany
-    @JoinColumn(name = "tierlistelement_id", nullable = false)
-    private List<TierListElement> tierlistelement;
+
 }
