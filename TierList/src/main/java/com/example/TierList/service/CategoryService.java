@@ -12,30 +12,30 @@ import java.util.Optional;
 @RequiredArgsConstructor 
 public class CategoryService {
 
-    private final CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;       // Elemento della category repository per utilizzare tutti i metodi jpa e i metodi aggiunti a mano nella classe
 
  
-    public List<Category> getAllCategories() {
+    public List<Category> getAllCategories() {          // Visualizza tutte le categorie
         return categoryRepository.findAll();
     }
 
   
-    public Optional<Category> getCategoryById(Long id) {
+    public Optional<Category> getCategoryById(Long id) {    // Visualizza le categorie tramite id
         return categoryRepository.findById(id);
     }
 
     
-    public Optional<Category> getCategoryByCategoryName(String categoryName) {
+    public Optional<Category> getCategoryByCategoryName(String categoryName) {      // Visualizza tutte le categorie tramite name
         return categoryRepository.findByCategoryName(categoryName);
     }
 
    
-    public Category saveCategory(Category category) {
+    public Category saveCategory(Category category) {               // Salva le categorie
         return categoryRepository.save(category);
     }
 
    
-    public void deleteCategory(Long id) {
+    public void deleteCategory(Long id) {               // Cancella le categorie tramite id
         categoryRepository.deleteById(id);
     }
 }

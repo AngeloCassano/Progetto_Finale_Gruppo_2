@@ -12,44 +12,44 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class TierListService {
 
-    private final TierListRepository tierListRepository;
+    private final TierListRepository tierListRepository;  // Oggetto della repo per utilizzare i metodo specifici
 
-    
+    // Metodo per ottenere tutte le tierlist 
     public List<TierList> getAllTierLists() {
         return tierListRepository.findAll();
     }
 
-   
+    // Metodo per ottenere una tierlist tramite id
     public Optional<TierList> getTierListById(Long id) {
         return tierListRepository.findById(id);
     }
 
-  
+    // Metodo per salvare una tierlist
     public TierList saveTierList(TierList tierList) {
         return tierListRepository.save(tierList);
     }
 
-   
+    // Metodo per cancellare tramite id
     public void deleteTierList(Long id) {
         tierListRepository.deleteById(id);
     }
 
- 
+    // Metodo per ottenere una tier list tramite utente id 
     public List<TierList> getTierListsByUtenteId(Long utenteId) {
         return tierListRepository.findByUtente_Id(utenteId);
     }
 
-    
+    // Metodo per ottenere una tierlist tramite la categoria
     public List<TierList> getTierListsByCategoryId(Long categoryId) {
         return tierListRepository.findByCategory_Id(categoryId);
     }
 
-
+    // Metodo per ottenere una tierlist tramite titolo
     public Optional<TierList> searchTierListByTitolo(String titolo) {
         return tierListRepository.findByTitoloContainingIgnoreCase(titolo);
     }
 
-  
+    // Metodo per ottenere una tierlist tramite utente e categoria
     public List<TierList> getTierListsByUtenteAndCategory(Long utenteId, Long categoryId) {
         return tierListRepository.findByUtente_IdAndCategory_Id(utenteId, categoryId);
     }
