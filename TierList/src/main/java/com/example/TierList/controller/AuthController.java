@@ -1,6 +1,5 @@
 package com.example.TierList.controller;
 
-
 import java.util.Map;
 import java.util.UUID;
 

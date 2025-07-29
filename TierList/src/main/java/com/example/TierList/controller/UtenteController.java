@@ -9,7 +9,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,9 +27,12 @@ public class UtenteController {
     @Autowired
     private UtenteRepository utenteRepository;
 
+<<<<<<< HEAD
 
 
     //Endpoint Put che aggiorna un utente
+=======
+>>>>>>> df102c4e8438571f12f8b3252f4ddff776700903
     @PutMapping("/{id}")
     public ResponseEntity<UtenteDTO> update(@PathVariable Long id, @RequestBody UtenteDTO dto) {
         return utenteRepository.findById(id)
@@ -55,6 +57,6 @@ public class UtenteController {
 
     @GetMapping("/info")
     public String infoUtente(Authentication auth) {
-    return "Ciao " + auth.getName() + ", sei autenticato come USER o ADMIN.";
-}
+        return "Ciao " + auth.getName() + ", sei autenticato come USER o ADMIN.";
+    }
 }

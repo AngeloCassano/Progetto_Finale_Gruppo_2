@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TierListElementDTO {
+public class TierDTO {
     private Long id;
 
     private Long tierListId;

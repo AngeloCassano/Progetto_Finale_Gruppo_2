@@ -22,16 +22,19 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/admin")
 public class AdminController {
 
-   private final UtenteRepository utenteRepository;
-    
+    private final UtenteRepository utenteRepository;
 
-@GetMapping("/pannello")
-public String pannelloAdmin(Authentication auth) {
-return "Benvenuto " + auth.getName() + ", sei un ADMIN.";
-}
+    @GetMapping("/pannello")
+    public String pannelloAdmin(Authentication auth) {
+        return "Benvenuto " + auth.getName() + ", sei un ADMIN.";
+    }
 
+<<<<<<< HEAD
     //Endpoint get per ottenere tutti gli utenti
     @GetMapping 
+=======
+    @GetMapping
+>>>>>>> df102c4e8438571f12f8b3252f4ddff776700903
     public List<UtenteDTO> getAll() {
         return utenteRepository.findAll()
                 .stream()
@@ -39,8 +42,12 @@ return "Benvenuto " + auth.getName() + ", sei un ADMIN.";
                 .collect(Collectors.toList());
     }
 
+<<<<<<< HEAD
     //Endpoint get per ottenere l'utente tramite id
     @GetMapping("/{id}") 
+=======
+    @GetMapping("/{id}")
+>>>>>>> df102c4e8438571f12f8b3252f4ddff776700903
     public ResponseEntity<UtenteDTO> getById(@PathVariable Long id) {
         return utenteRepository.findById(id)
                 .map(u -> ResponseEntity.ok(UtenteMapper.toDTO(u)))

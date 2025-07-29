@@ -36,6 +36,7 @@ public class ElementController {
         return ResponseEntity.ok(elementService.searchElementsByName(name));
     }
 
+<<<<<<< HEAD
     //Endpoint Get per ottenere elementi tramite categoria
     @GetMapping("/category/{categoryId}")
     public ResponseEntity<List<Element>> getElementsByCategory(@PathVariable Long categoryId) {
@@ -54,6 +55,9 @@ public class ElementController {
     }
 
     //Endpoint Post che salva nuovo elemento
+=======
+    // ➕ POST: salva nuovo elemento
+>>>>>>> df102c4e8438571f12f8b3252f4ddff776700903
     @PostMapping
     public ResponseEntity<Element> saveElement(@RequestBody Element element) {
         Element saved = elementService.saveElement(element);

@@ -12,38 +12,30 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ElementService {
 
-    private final ElementRepository elementRepository;
+    private final ElementRepository elementRepository;  // Elemento per il richiamo dei metodi del crud piu i metodi dell elemento repository
 
+    // Metodo per ottenere tutti gli elementi
     public List<Element> getAllElements() {
         return elementRepository.findAll();
     }
 
-
+    // Metodo per ottenere un elemento tramite id
     public Optional<Element> getElementById(Long id) {
         return elementRepository.findById(id);
     }
 
-   
+    // Metodo per salvare un elemento 
     public Element saveElement(Element element) {
         return elementRepository.save(element);
     }
 
-
+    // Metodo per cancellare un elemento
     public void deleteElement(Long id) {
         elementRepository.deleteById(id);
     }
 
-   
+    // Metodo per cercare tutti gli elementi tramite il nome
     public List<Element> searchElementsByName(String name) {
         return elementRepository.findByNameContainingIgnoreCase(name);
-    }
-
-    public List<Element> getElementsByCategoryId(Long categoryId) {
-        return elementRepository.findByCategory_Id(categoryId);
-    }
-
- 
-    public Optional<Element> getElementByNameAndCategoryId(String name, Long categoryId) {
-        return elementRepository.findByNameAndCategory_Id(name, categoryId);
     }
 }
