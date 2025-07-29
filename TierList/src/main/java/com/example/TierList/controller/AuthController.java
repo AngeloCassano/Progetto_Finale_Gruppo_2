@@ -27,11 +27,8 @@ import com.example.TierList.service.JwtService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
-/**
- * Controller REST per la gestione dell'autenticazione tramite JWT.
- * Espone un endpoint POST /auth/login per autenticare un utente
- * e restituire un token JWT valido.
- */
+
+ //Controller REST per la gestione dell'autenticazione tramite JWT token.
 @AllArgsConstructor
 @RestController
 @RequestMapping("/auth") // Tutti gli endpoint di questa classe iniziano con /auth
@@ -43,11 +40,8 @@ public class AuthController {
     private final UtenteRepository utenteRepository;
     private final PasswordEncoder passwordEncoder;
 
-    /**
-     * Endpoint POST /auth/login
-     * Riceve username e password (AuthRequest),
-     * autentica l'utente e restituisce un token JWT (AuthResponse).
-     */
+    
+    //Endpoint Post che riceve username e password e autentica l'utente e restituisce un token JWT
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request) {
         Authentication auth = authManager.authenticate(
@@ -65,6 +59,7 @@ public class AuthController {
         return ResponseEntity.ok(new AuthResponse(accessToken, refreshToken));
     }
 
+    //Endpoint Post che prende il refresh token e genere un nuovo token
     @PostMapping("/refresh")
     public ResponseEntity<AuthResponse> refresh(@RequestBody Map<String, String> request) {
         String refreshToken = request.get("refreshToken");
@@ -80,6 +75,9 @@ public class AuthController {
         return ResponseEntity.ok(new AuthResponse(newToken, refreshToken));
     }
 
+
+//Endpoint per effettuare il logout dell'utente
+//Riceve un refreshToken cerca l'utente associato a quel token nel database e, se trovato, invalida il token impostandolo a null
     @PostMapping("/logout")
     public ResponseEntity<String> logout(@RequestBody Map<String, String> request) {
         String refreshToken = request.get("refreshToken");
@@ -95,6 +93,8 @@ public class AuthController {
         return ResponseEntity.ok("Logout effettuato.");
     }
 
+    //Endpoint Post per registrare un nuovo utente
+    //prende username, password e ruolo e crea un nuovo utente
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest request) {
 

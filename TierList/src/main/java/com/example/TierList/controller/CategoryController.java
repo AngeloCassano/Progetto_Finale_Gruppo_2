@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+//Controller REST per la gestione delle categorie delle tierlist.
 @RestController
 @RequestMapping("/api/categories")
 @RequiredArgsConstructor
@@ -18,23 +19,15 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
-    /**
-     * Recupera tutte le Category.
-     * GET /api/categories
-     * @return Una lista di tutte le Category.
-     */
+    
+    //Endpoint Get che recupera tutte le categorie
     @GetMapping
     public ResponseEntity<List<Category>> getAllCategories() {
         List<Category> categories = categoryService.getAllCategories();
         return new ResponseEntity<>(categories, HttpStatus.OK);
     }
 
-    /**
-     * Recupera una Category tramite il suo ID.
-     * GET /api/categories/{id}
-     * @param id L'ID della Category.
-     * @return La Category se trovata, altrimenti HttpStatus.NOT_FOUND.
-     */
+    //Endpoint Get che recupera la categoria tramite id
     @GetMapping("/{id}")
     public ResponseEntity<Category> getCategoryById(@PathVariable Long id) {
         Optional<Category> category = categoryService.getCategoryById(id);
@@ -42,12 +35,7 @@ public class CategoryController {
                        .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    /**
-     * Recupera una Category tramite il suo nome.
-     * GET /api/categories/by-name
-     * @param categoryName Il nome della Category.
-     * @return La Category se trovata, altrimenti HttpStatus.NOT_FOUND.
-     */
+     //Endpoint Get che recupera la categoria tramite il nome
     @GetMapping("/by-name")
     public ResponseEntity<Category> getCategoryByCategoryName(@RequestParam String categoryName) {
         Optional<Category> category = categoryService.getCategoryByCategoryName(categoryName);
@@ -55,25 +43,14 @@ public class CategoryController {
                        .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    /**
-     * Salva una nuova Category o aggiorna una esistente.
-     * POST /api/categories
-     * @param category L'oggetto Category da salvare/aggiornare.
-     * @return La Category salvata/aggiornata.
-     */
+    //Endpoint Post che salva o aggiorna una categoria
     @PostMapping
     public ResponseEntity<Category> createCategory(@RequestBody Category category) {
         Category savedCategory = categoryService.saveCategory(category);
         return new ResponseEntity<>(savedCategory, HttpStatus.CREATED);
     }
 
-    /**
-     * Aggiorna una Category esistente.
-     * PUT /api/categories/{id}
-     * @param id L'ID della Category da aggiornare.
-     * @param category Il corpo della Category aggiornata.
-     * @return La Category aggiornata se trovata, altrimenti HttpStatus.NOT_FOUND.
-     */
+    //Endpoint Put che che aggiorna una categoria
     @PutMapping("/{id}")
     public ResponseEntity<Category> updateCategory(@PathVariable Long id, @RequestBody Category category) {
         // Verifica se la Category esiste prima di aggiornarla
@@ -86,12 +63,7 @@ public class CategoryController {
         }
     }
 
-    /**
-     * Elimina una Category tramite il suo ID.
-     * DELETE /api/categories/{id}
-     * @param id L'ID della Category da eliminare.
-     * @return HttpStatus.NO_CONTENT se eliminata con successo, altrimenti HttpStatus.NOT_FOUND.
-     */
+   //Endpoint Delete che cancella una categoria tramite id
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
         if (categoryService.getCategoryById(id).isPresent()) {

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+//Controller REST per la gestione delle posizioni degli elementi delle tierlist
 @RestController
 @RequestMapping("/api/tierlist-elements")
 @RequiredArgsConstructor
@@ -17,23 +18,16 @@ public class TierListElementController {
 
     private final TierListElementService tierListElementService;
 
-    /**
-     * Recupera tutti i TierListElement.
-     * GET /api/tierlist-elements
-     * @return Una lista di tutti i TierListElement.
-     */
+    
+    //Endpoint Get che recupera tutti i TierListElement
     @GetMapping
     public ResponseEntity<List<TierListElement>> getAllTierListElements() {
         List<TierListElement> elements = tierListElementService.getAllTierListElements();
         return new ResponseEntity<>(elements, HttpStatus.OK);
     }
 
-    /**
-     * Recupera un TierListElement tramite il suo ID.
-     * GET /api/tierlist-elements/{id}
-     * @param id L'ID del TierListElement.
-     * @return Il TierListElement se trovato, altrimenti HttpStatus.NOT_FOUND.
-     */
+  
+    //Endpoint Get che recupera un TierListElement tramite il suo ID
     @GetMapping("/{id}")
     public ResponseEntity<TierListElement> getTierListElementById(@PathVariable Long id) {
         Optional<TierListElement> element = tierListElementService.getTierListElementById(id);
@@ -41,25 +35,16 @@ public class TierListElementController {
                       .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    /**
-     * Salva un nuovo TierListElement o aggiorna uno esistente.
-     * POST /api/tierlist-elements
-     * @param tierListElement L'oggetto TierListElement da salvare/aggiornare.
-     * @return Il TierListElement salvato/aggiornato.
-     */
+
+    //Endpoint Post che salva un nuovo TierListElement o aggiorna uno esistente
     @PostMapping
     public ResponseEntity<TierListElement> createTierListElement(@RequestBody TierListElement tierListElement) {
         TierListElement savedElement = tierListElementService.saveTierListElement(tierListElement);
         return new ResponseEntity<>(savedElement, HttpStatus.CREATED);
     }
 
-    /**
-     * Aggiorna un TierListElement esistente.
-     * PUT /api/tierlist-elements/{id}
-     * @param id L'ID del TierListElement da aggiornare.
-     * @param tierListElement Il corpo del TierListElement aggiornato.
-     * @return Il TierListElement aggiornato se trovato, altrimenti HttpStatus.NOT_FOUND.
-     */
+    
+    //Endpoint Put che aggiorna un TierListElement
     @PutMapping("/{id}")
     public ResponseEntity<TierListElement> updateTierListElement(@PathVariable Long id, @RequestBody TierListElement tierListElement) {
         // Verifica se il TierListElement esiste prima di aggiornarlo
@@ -72,12 +57,8 @@ public class TierListElementController {
         }
     }
 
-    /**
-     * Elimina un TierListElement tramite il suo ID.
-     * DELETE /api/tierlist-elements/{id}
-     * @param id L'ID del TierListElement da eliminare.
-     * @return HttpStatus.NO_CONTENT se eliminato con successo, altrimenti HttpStatus.NOT_FOUND.
-     */
+    
+    //Endpoint Delete che elimina un TierListElement tramite il suo ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTierListElement(@PathVariable Long id) {
         if (tierListElementService.getTierListElementById(id).isPresent()) {
@@ -88,37 +69,23 @@ public class TierListElementController {
         }
     }
 
-    /**
-     * Recupera tutti i TierListElement appartenenti a una specifica TierList.
-     * GET /api/tierlist-elements/by-tierlist/{tierlistId}
-     * @param tierlistId L'ID della TierList.
-     * @return Una lista di TierListElement di quella TierList.
-     */
+    //Endpoint Get che recupera tutti i TierListElement appartenenti a una specifica TierList
     @GetMapping("/by-tierlist/{tierlistId}")
     public ResponseEntity<List<TierListElement>> getTierListElementsByTierlistId(@PathVariable Long tierlistId) {
         List<TierListElement> elements = tierListElementService.getTierListElementsByTierlistId(tierlistId);
         return new ResponseEntity<>(elements, HttpStatus.OK);
     }
 
-    /**
-     * Recupera tutti i TierListElement che si riferiscono a un Element specifico.
-     * GET /api/tierlist-elements/by-element/{elementId}
-     * @param elementId L'ID dell'Element.
-     * @return Una lista di TierListElement che usano quell'Element.
-     */
+  
+    //Endpoint Get che recupera tutti i TierListElement che si riferiscono a un Element specifico.
     @GetMapping("/by-element/{elementId}")
     public ResponseEntity<List<TierListElement>> getTierListElementsByElementId(@PathVariable Long elementId) {
         List<TierListElement> elements = tierListElementService.getTierListElementsByElementId(elementId);
         return new ResponseEntity<>(elements, HttpStatus.OK);
     }
 
-    /**
-     * Trova un TierListElement specifico per una data TierList e un dato Element.
-     * GET /api/tierlist-elements/by-tierlist-and-element
-     * @param tierlistId L'ID della TierList.
-     * @param elementId L'ID dell'Element.
-     * @return Un Optional contenente il TierListElement se trovato, altrimenti HttpStatus.NOT_FOUND.
-     */
+  
+    //Endpoint Get che trova un TierListElement specifico per una data TierList e un dato Element.
     @GetMapping("/by-tierlist-and-element")
     public ResponseEntity<TierListElement> getTierListElementByTierlistAndElement(
             @RequestParam Long tierlistId,

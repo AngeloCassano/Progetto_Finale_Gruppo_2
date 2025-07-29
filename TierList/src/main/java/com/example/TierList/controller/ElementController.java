@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+//Controller REST per la gestione degli elementi di una tierlist
 @RestController
 @RequestMapping("/api/elements")
 @RequiredArgsConstructor
@@ -15,13 +16,13 @@ public class ElementController {
 
     private final ElementService elementService;
 
-    // 🔍 GET: tutti gli elementi
+    //Endpoint Get che ottiene tutti gli elementi
     @GetMapping
     public ResponseEntity<List<Element>> getAllElements() {
         return ResponseEntity.ok(elementService.getAllElements());
     }
 
-    // 🔍 GET: elemento per ID
+   //Endpoint Get che ottiene elementi tramite il suo id
     @GetMapping("/{id}")
     public ResponseEntity<Element> getElementById(@PathVariable Long id) {
         return elementService.getElementById(id)
@@ -29,19 +30,19 @@ public class ElementController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // 🔎 GET: cerca per nome
+    //Endpoint Get per cercare elementi tramite il nome
     @GetMapping("/search")
     public ResponseEntity<List<Element>> searchElementsByName(@RequestParam String name) {
         return ResponseEntity.ok(elementService.searchElementsByName(name));
     }
 
-    // 🔎 GET: per categoryId
+    //Endpoint Get per ottenere elementi tramite categoria
     @GetMapping("/category/{categoryId}")
     public ResponseEntity<List<Element>> getElementsByCategory(@PathVariable Long categoryId) {
         return ResponseEntity.ok(elementService.getElementsByCategoryId(categoryId));
     }
 
-    // 🔎 GET: per nome + categoryId
+    //Endpoint Get che ottiene elementi tramite nome e categoria
     @GetMapping("/check")
     public ResponseEntity<Element> getElementByNameAndCategoryId(
             @RequestParam String name,
@@ -52,14 +53,15 @@ public class ElementController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // ➕ POST: salva nuovo elemento
+    //Endpoint Post che salva nuovo elemento
     @PostMapping
     public ResponseEntity<Element> saveElement(@RequestBody Element element) {
         Element saved = elementService.saveElement(element);
         return ResponseEntity.ok(saved);
     }
 
-    // ❌ DELETE: elimina elemento
+
+    //Endpoint Delete per cancellare elemento tramite id
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteElement(@PathVariable Long id) {
         elementService.deleteElement(id);

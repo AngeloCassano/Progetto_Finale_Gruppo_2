@@ -16,6 +16,7 @@ import com.example.TierList.repository.UtenteRepository;
 
 import lombok.RequiredArgsConstructor;
 
+//Controller Rest per gestire i comandi degli admin
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/admin")
@@ -29,6 +30,7 @@ public String pannelloAdmin(Authentication auth) {
 return "Benvenuto " + auth.getName() + ", sei un ADMIN.";
 }
 
+    //Endpoint get per ottenere tutti gli utenti
     @GetMapping 
     public List<UtenteDTO> getAll() {
         return utenteRepository.findAll()
@@ -37,6 +39,7 @@ return "Benvenuto " + auth.getName() + ", sei un ADMIN.";
                 .collect(Collectors.toList());
     }
 
+    //Endpoint get per ottenere l'utente tramite id
     @GetMapping("/{id}") 
     public ResponseEntity<UtenteDTO> getById(@PathVariable Long id) {
         return utenteRepository.findById(id)
