@@ -1,9 +1,27 @@
-import React from 'react'
+// src/pages/Home/Home.jsx
+import React from "react";
+import ElementRooster from "../../components/ElementRooster";
+import TierList from "../../components/TierList";
+import "../../App.css";
+import { useContext } from "react";
+import  AuthContext  from "../../contexts/AuthContext";
+import Login from "../Auth/Login";
 
-function Home() {
+const Home = () => {
+  const { isAuthenticated, isLoggedIn } = useContext(AuthContext);
   return (
-    <div>Home</div>
-  )
-}
+    <div className="app-container">
+      {isAuthenticated && isLoggedIn ? (
+        <>
+          <ElementRooster />
 
-export default Home
+          <TierList />
+        </>
+      ) : (
+        <Login />
+      )}
+    </div>
+  );
+};
+
+export default Home;
