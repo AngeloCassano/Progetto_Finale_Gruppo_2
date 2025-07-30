@@ -26,6 +26,14 @@ public class UtenteController {
     @Autowired
     private UtenteRepository utenteRepository;
 
+    @GetMapping
+    public ResponseEntity<UtenteDTO> getUserInfo(Authentication auth) {
+            return utenteRepository.findByUsername(auth.getName())
+                .map(u -> ResponseEntity.ok(UtenteMapper.toDTO(u)))
+                .orElse(ResponseEntity.notFound().build());
+         
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<UtenteDTO> update(@PathVariable Long id, @RequestBody UtenteDTO dto) {
         return utenteRepository.findById(id)
