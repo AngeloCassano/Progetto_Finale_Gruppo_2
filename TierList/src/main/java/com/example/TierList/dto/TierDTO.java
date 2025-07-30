@@ -1,5 +1,7 @@
 package com.example.TierList.dto;
 
+import java.util.List;
+
 import com.example.TierList.model.TierNameType;
 
 import lombok.AllArgsConstructor;
@@ -17,8 +19,11 @@ public class TierDTO {
 
     private Long elementId;
     private String elementName;
+    private List<ElementDTO> elements; // Questo campo ora conterrà la lista di ElementDTO
     private String imageUrl;
 
    private TierNameType tierName;
 }
+
+
 

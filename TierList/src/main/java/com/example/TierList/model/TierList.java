@@ -2,6 +2,8 @@ package com.example.TierList.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,6 +36,7 @@ public class TierList {
     @JoinColumn(name = "categoria_id", nullable = false)
     private Category category;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "tierlist", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tier> tiers;
 }
