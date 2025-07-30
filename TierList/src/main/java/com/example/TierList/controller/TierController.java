@@ -20,7 +20,7 @@ import com.example.TierList.service.TierService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/tierlist-elements")
+@RequestMapping("/api/tiers")
 @RequiredArgsConstructor
 public class TierController {
 

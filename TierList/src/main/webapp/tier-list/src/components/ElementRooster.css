@@ -1,0 +1,55 @@
+.element-rooster-grid img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.dish-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 10px;
+}
+
+/* Aggiungi al tuo ElementRooster.css */
+.dish-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.dish-name {
+  margin: 0;
+  font-weight: 500;
+  text-align: center;
+}
+
+.element-rooster {
+  padding: 16px;
+}
+
+.element-rooster-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.element-rooster-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+}
+
+.rooster-empty {
+  text-align: center;
+  color: #6b7280;
+  font-style: italic;
+  padding: 40px;
+  background-color: #f9fafb;
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  margin-top: 16px;
+}
