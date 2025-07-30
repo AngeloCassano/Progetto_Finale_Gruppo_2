@@ -34,9 +34,9 @@ public class UtenteController {
          
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<UtenteDTO> update(@PathVariable Long id, @RequestBody UtenteDTO dto) {
-        return utenteRepository.findById(id)
+    @PutMapping
+    public ResponseEntity<UtenteDTO> update(Authentication auth, @RequestBody UtenteDTO dto) {
+        return utenteRepository.findByUsername(auth.getName())
                 .map(existing -> {
                     existing.setUsername(dto.getUsername());
                     Utente updated = utenteRepository.save(existing);
@@ -45,9 +45,9 @@ public class UtenteController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
-        return utenteRepository.findById(id)
+    @DeleteMapping
+    public ResponseEntity<?> delete(Authentication auth) {
+        return utenteRepository.findByUsername(auth.getName())
                 .map(existing -> {
                     utenteRepository.delete(existing);
                     return ResponseEntity.noContent().build();
