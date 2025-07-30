@@ -19,7 +19,6 @@ import com.example.TierList.mapper.UtenteMapper;
 import com.example.TierList.model.Utente;
 import com.example.TierList.repository.UtenteRepository;
 
-//Controller REST per la gestione degli utenti
 @RestController
 @RequestMapping("/user")
 public class UtenteController {
@@ -27,12 +26,14 @@ public class UtenteController {
     @Autowired
     private UtenteRepository utenteRepository;
 
-<<<<<<< HEAD
+    @GetMapping
+    public ResponseEntity<UtenteDTO> getUserInfo(Authentication auth) {
+            return utenteRepository.findByUsername(auth.getName())
+                .map(u -> ResponseEntity.ok(UtenteMapper.toDTO(u)))
+                .orElse(ResponseEntity.notFound().build());
+         
+    }
 
-
-    //Endpoint Put che aggiorna un utente
-=======
->>>>>>> df102c4e8438571f12f8b3252f4ddff776700903
     @PutMapping("/{id}")
     public ResponseEntity<UtenteDTO> update(@PathVariable Long id, @RequestBody UtenteDTO dto) {
         return utenteRepository.findById(id)
@@ -44,7 +45,6 @@ public class UtenteController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    //Endpoint Delete che cancella un utente tramite id 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         return utenteRepository.findById(id)
