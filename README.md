@@ -16,11 +16,11 @@ Applicazione web per la creazione e gestione di **tier list** con **back-end in 
 
 ## 👥 Team di sviluppo
 
-- **Angelo Cassano** – Service e Repository  
-- **Luca Alessio** – Service e Repository  
-- **Francesco Mochi** – Security ,JWT, documentazione e UML  
-- **Valerio Bellucci** – DTO, Mapper e Controller  
-- **Giovanni Dadone** – Front-end e supporto Back-end  
+- **Angelo Cassano** – Service e Repository
+- **Luca Alessio** – Service e Repository
+- **Francesco Mochi** – Security, JWT, schema ER e UML
+- **Valerio Bellucci** – DTO, Mapper e Controller
+- **Giovanni Dadone** – Front-end e supporto Back-end
 
 📌 Tutti i membri hanno collaborato alla fase di debug e rifinitura finale del progetto.
 
