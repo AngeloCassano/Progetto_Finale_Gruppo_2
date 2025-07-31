@@ -1,6 +1,5 @@
 package com.example.TierList.security;
 
-
 import java.util.List;
 
 import org.springframework.context.annotation.Bean;
@@ -40,14 +39,18 @@ public class SecurityConfig {
 
     /**
      * Definisce la catena di sicurezza HTTP:
+     * - Abilita CORS
      * - Disabilita CSRF
-     * - Imposta la sessione in modalitÃ  stateless (JWT)
+     * - Imposta la sessione in modalità stateless (JWT)
      * - Applica regole di autorizzazione
      * - Registra il filtro JWT prima del filtro di autenticazione standard
      */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
+            // ABILITA CORS - IMPORTANTE!
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+            
             // Disabilita CSRF (dato che non usiamo cookie/sessione)
             .csrf(csrf -> csrf.disable())
 
@@ -57,7 +60,7 @@ public class SecurityConfig {
             // Definisce le regole di accesso alle rotte
             .authorizeHttpRequests(auth -> auth
                 // Le rotte di login e pubbliche non richiedono autenticazione
-                .requestMatchers("/auth/**", "/public/**").permitAll()
+                .requestMatchers("/auth/**", "/public/**", "/api/categories/**", "/api/elements/**").permitAll()
 
                 // Le rotte /admin/** richiedono il ruolo ADMIN
                 .requestMatchers("/admin/**").hasRole("ADMIN")
@@ -88,19 +91,20 @@ public class SecurityConfig {
         return authBuilder.build();
     }
 
-     /**
-     * Configurazione globale CORS: permette richieste da frontend (es. localhost:3000).
+    /**
+     * Configurazione CORS per Spring Security
      */
-    // @Bean
-    // public CorsConfigurationSource corsConfigurationSource() {
-    //     CorsConfiguration config = new CorsConfiguration();
-    //     config.setAllowedOrigins(List.of("http://localhost:5173")); // ✅ Cambia con il tuo frontend
-    //     config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-    //     config.setAllowedHeaders(List.of("*"));
-    //     config.setAllowCredentials(true);
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowedOrigins(List.of("http://localhost:5173", "http://localhost:3000"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedHeaders(List.of("*"));
+        config.setAllowCredentials(true);
+        config.setMaxAge(3600L);
 
-    //     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    //     source.registerCorsConfiguration("/**", config);
-    //     return source;
-    // }
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+        return source;
+    }
 }

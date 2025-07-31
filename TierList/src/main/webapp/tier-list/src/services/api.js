@@ -4,41 +4,41 @@ const API_BASE_URL = 'http://localhost:8080'; // Modifica con l'URL del tuo back
 
 // Funzione generica per le chiamate API
 async function fetchApi(endpoint, method = 'GET', body = null, token = null) {
-  const headers = {
-    'Content-Type': 'application/json',
-  };
+    const headers = {
+        'Content-Type': 'application/json',
+    };
 
-  if (token) {
-    headers['Authorization'] = `Bearer ${token}`;
-  }
-
-  const config = {
-    method,
-    headers,
-  };
-
-  if (body) {
-    config.body = JSON.stringify(body);
-  }
-
-  const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
-  
-  if (!response.ok) {
-    // Prima prova a parsare come JSON, se fallisce restituisci il testo
-    const errorText = await response.text();
-    try {
-      const errorJson = JSON.parse(errorText);
-      throw new Error(errorJson.message || 'Errore nella richiesta API');
-    } catch {
-      throw new Error(errorText || 'Errore nella richiesta API');
+    if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
     }
-  }
 
-  if (response.status === 204) {
-    return null;
-  }
+    const config = {
+        method,
+        headers,
+    };
 
-  return response.json();
+    if (body) {
+        config.body = JSON.stringify(body);
+    }
+
+    const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
+
+    if (!response.ok) {
+        // Prima prova a parsare come JSON, se fallisce restituisci il testo
+        const errorText = await response.text();
+        try {
+            const errorJson = JSON.parse(errorText);
+            throw new Error(errorJson.message || 'Errore nella richiesta API');
+        } catch {
+            throw new Error(errorText || 'Errore nella richiesta API');
+        }
+    }
+
+    if (response.status === 204) {
+        return null;
+    }
+
+    return response.json();
 }
 
 // Auth API
@@ -199,6 +199,39 @@ export const categoryApi = {
     deleteCategory: async (id, token) => {
         return fetchApi(`/api/categories/${id}`, 'DELETE', null, token);
     },
+    // NUOVI METODI per Category
+    getElementsByCategory: async (categoryId) => {
+        return fetchApi(`/api/elements/by-category/${categoryId}`);
+    },
+
+    getUnassignedElementsByCategory: async (categoryId) => {
+        return fetchApi(`/api/elements/by-category/${categoryId}/unassigned`);
+    },
+
+    getElementsByCategoryAndTier: async (categoryId, tierId) => {
+        return fetchApi(`/api/elements/by-category/${categoryId}/tier/${tierId}`);
+    },
+
+    countElementsByCategory: async (categoryId) => {
+        return fetchApi(`/api/elements/by-category/${categoryId}/count`);
+    },
+
+    createElementWithCategory: async (name, imageUrl, categoryId, token) => {
+        const params = new URLSearchParams({
+            name,
+            imageUrl,
+            categoryId: categoryId.toString()
+        });
+        return fetchApi(`/api/elements/create?${params}`, 'POST', null, token);
+    },
+
+    assignElementToTier: async (elementId, tierId, token) => {
+        return fetchApi(`/api/elements/${elementId}/assign-tier/${tierId}`, 'PUT', null, token);
+    },
+
+    removeElementFromTier: async (elementId, token) => {
+        return fetchApi(`/api/elements/${elementId}/remove-from-tier`, 'PUT', null, token);
+    }
 };
 
 export default {
