@@ -1,0 +1,16 @@
+.tier-list {
+  margin-top: 32px;
+}
+
+.tier-list-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.tier-list-container {
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  background-color: #f9fafb;
+}

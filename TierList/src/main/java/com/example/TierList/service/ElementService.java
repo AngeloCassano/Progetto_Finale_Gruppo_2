@@ -1,41 +1,109 @@
+// ElementService.java
 package com.example.TierList.service;
-
-import com.example.TierList.model.Element;
-import com.example.TierList.repository.ElementRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.TierList.model.Element;
+import com.example.TierList.model.Category;
+import com.example.TierList.repository.ElementRepository;
+import com.example.TierList.repository.CategoryRepository;
+
 @Service
-@RequiredArgsConstructor
 public class ElementService {
 
-    private final ElementRepository elementRepository;  // Elemento per il richiamo dei metodi del crud piu i metodi dell elemento repository
+    @Autowired
+    private ElementRepository elementRepository;
+    
+    @Autowired
+    private CategoryRepository categoryRepository;
 
-    // Metodo per ottenere tutti gli elementi
-    public List<Element> getAllElements() {
+    // Metodi esistenti
+    public List<Element> findAll() {
         return elementRepository.findAll();
     }
 
-    // Metodo per ottenere un elemento tramite id
-    public Optional<Element> getElementById(Long id) {
+    public Optional<Element> findById(Long id) {
         return elementRepository.findById(id);
     }
 
-    // Metodo per salvare un elemento 
-    public Element saveElement(Element element) {
+    public Element save(Element element) {
         return elementRepository.save(element);
     }
 
-    // Metodo per cancellare un elemento
-    public void deleteElement(Long id) {
+    public void deleteById(Long id) {
         elementRepository.deleteById(id);
     }
 
-    // Metodo per cercare tutti gli elementi tramite il nome
-    public List<Element> searchElementsByName(String name) {
+    public List<Element> findByNameContaining(String name) {
         return elementRepository.findByNameContainingIgnoreCase(name);
+    }
+
+    // public Optional<Element> findByName(String name) {
+    //     return elementRepository.findByName(name);
+    // }
+
+    // NUOVI METODI per Category
+    public List<Element> findByCategoryId(Long categoryId) {
+        return elementRepository.findByCategoryId(categoryId);
+    }
+    
+    public List<Element> findByCategoryIdAndTierId(Long categoryId, Long tierId) {
+        return elementRepository.findByCategoryIdAndTierId(categoryId, tierId);
+    }
+    
+    public List<Element> findUnassignedElementsByCategory(Long categoryId) {
+        return elementRepository.findByCategoryIdAndTierIsNull(categoryId);
+    }
+    
+    public long countElementsByCategory(Long categoryId) {
+        return elementRepository.countByCategoryId(categoryId);
+    }
+    
+    // Metodo per creare un elemento con categoria
+    public Element createElement(String name, String imageUrl, Long categoryId) {
+        Optional<Category> category = categoryRepository.findById(categoryId);
+        if (category.isEmpty()) {
+            throw new RuntimeException("Category not found with id: " + categoryId);
+        }
+        
+        Element element = new Element();
+        element.setName(name);
+        element.setImageUrl(imageUrl);
+        element.setCategory(category.get());
+        // tier rimane null inizialmente
+        
+        return elementRepository.save(element);
+    }
+    
+    // Metodo per assegnare un elemento a un tier
+    public Element assignElementToTier(Long elementId, Long tierId) {
+        Optional<Element> elementOpt = elementRepository.findById(elementId);
+        if (elementOpt.isEmpty()) {
+            throw new RuntimeException("Element not found with id: " + elementId);
+        }
+        
+        Element element = elementOpt.get();
+        // Qui dovresti anche verificare che il tier esista
+        // Tier tier = tierRepository.findById(tierId).orElseThrow(...)
+        // element.setTier(tier);
+        
+        return elementRepository.save(element);
+    }
+    
+    // Metodo per rimuovere un elemento da un tier
+    public Element removeElementFromTier(Long elementId) {
+        Optional<Element> elementOpt = elementRepository.findById(elementId);
+        if (elementOpt.isEmpty()) {
+            throw new RuntimeException("Element not found with id: " + elementId);
+        }
+        
+        Element element = elementOpt.get();
+        element.setTier(null);
+        
+        return elementRepository.save(element);
     }
 }

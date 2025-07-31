@@ -1,0 +1,56 @@
+.tier-container {
+  padding: 16px;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  min-height: 120px;
+}
+
+.tier-header {
+  display: inline-block;
+  padding: 8px 16px;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.tier-header.tier-s {
+  background-color: #ef4444;
+}
+
+.tier-header.tier-a {
+  background-color: #f97316;
+}
+
+.tier-header.tier-b {
+  background-color: #eab308;
+}
+
+.tier-header.tier-c {
+  background-color: #22c55e;
+}
+
+.tier-header.tier-d {
+  background-color: #3b82f6;
+}
+
+.tier-elements {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  min-height: 60px;
+  padding: 8px;
+  border-radius: 8px;
+  align-items: center;
+}
+
+.tier-empty {
+  color: #6b7280;
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 60px;
+}

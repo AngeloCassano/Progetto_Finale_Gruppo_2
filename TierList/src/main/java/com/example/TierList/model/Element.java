@@ -29,7 +29,12 @@ public class Element {
     private String imageUrl;
 
     @ManyToOne
-    @JoinColumn(name = "tier_id", nullable = false)
+    @JoinColumn(name = "tier_id", nullable = true) // Cambia a nullable = true
     private Tier tier;
+    
+    // AGGIUNGI QUESTA RELAZIONE
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
 
 }
