@@ -37,25 +37,6 @@ Applicazione web per la creazione e gestione di **tier list** con **back-end in 
 
 ---
 
-## 📂 Struttura del progetto
-```plaintext
-📦 src
- ┣ 📂 main/java/com/example/TierList
- ┃ ┣ 📂 controller    # Controller REST
- ┃ ┣ 📂 dto           # Data Transfer Objects
- ┃ ┣ 📂 mapper        # Mapper Entity <-> DTO
- ┃ ┣ 📂 model         # Entità JPA
- ┃ ┣ 📂 repository    # Spring Data JPA Repository
- ┃ ┣ 📂 security      # Configurazione JWT e Spring Security
- ┃ ┣ 📂 service       # Business Logic
- ┃ ┗ 📜 TierListApplication.java
- ┗ 📂 main/resources
-   ┣ 📜 application.properties
-   ┗ 📜 schema.sql (opzionale)
-
-
----
-
 ## 📌 API Principali
 POST /auth/register → Registrazione utente
 
@@ -78,3 +59,20 @@ Autorizzazioni con Spring Security
 
 Rotte protette e ruoli gestiti
 
+---
+
+## 📂 Struttura del progetto
+```plaintext
+📦 src
+ ┣ 📂 main/java/com/example/TierList
+ ┃ ┣ 📂 controller    # Controller REST
+ ┃ ┣ 📂 dto           # Data Transfer Objects
+ ┃ ┣ 📂 mapper        # Mapper Entity <-> DTO
+ ┃ ┣ 📂 model         # Entità JPA
+ ┃ ┣ 📂 repository    # Spring Data JPA Repository
+ ┃ ┣ 📂 security      # Configurazione JWT e Spring Security
+ ┃ ┣ 📂 service       # Business Logic
+ ┃ ┗ 📜 TierListApplication.java
+ ┗ 📂 main/resources
+   ┣ 📜 application.properties
+   ┗ 📜 schema.sql (opzionale)
