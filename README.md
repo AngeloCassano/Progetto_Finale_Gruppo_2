@@ -18,7 +18,7 @@ Applicazione web per la creazione e gestione di **tier list** con **back-end in 
 
 - **Angelo Cassano** – Service e Repository  
 - **Luca Alessio** – Service e Repository  
-- **Francesco Mochi** – Security e JWT  
+- **Francesco Mochi** – Security ,JWT, documentazione e UML  
 - **Valerio Bellucci** – DTO, Mapper e Controller  
 - **Giovanni Dadone** – Front-end e supporto Back-end  
 
