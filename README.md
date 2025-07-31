@@ -52,8 +52,9 @@ Applicazione web per la creazione e gestione di **tier list** con **back-end in 
 ┣ 📜 application.properties
 ┗ 📜 schema.sql (opzionale)
 
+---
 
-📌 API Principali
+## 📌 API Principali
 POST /auth/register → Registrazione utente
 
 POST /auth/login → Login e ricezione token JWT
@@ -66,7 +67,9 @@ GET /api/tierlists/by-user/{utenteId} → Recupera TierList di un utente specifi
 
 http://localhost:8080/swagger-ui.html
 
-🔒 Sicurezza
+---
+
+## 🔒 Sicurezza
 Autenticazione basata su JWT
 
 Autorizzazioni con Spring Security
