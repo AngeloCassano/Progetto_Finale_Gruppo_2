@@ -9,10 +9,10 @@ import Login from "../Auth/Login";
 import CategorySelector from "../../components/CategorySelector";
 
 const Home = () => {
-  const { isAuthenticated, isLoggedIn } = useContext(AuthContext);
+  const { isAuthenticated } = useContext(AuthContext);
   return (
     <div className="app-container">
-      {isAuthenticated && isLoggedIn ? (
+      {isAuthenticated ? (
         <>
           <CategorySelector />
           <ElementRooster />

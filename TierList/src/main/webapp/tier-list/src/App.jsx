@@ -10,8 +10,8 @@ import CategoryProvider from "./providers/CategoryProvider";
 
 const App = () => {
   return (
-    <Router>
-      <AuthProvider>
+    <AuthProvider>
+      <Router>
         <TierProvider>
           <CategoryProvider>
             <Layout>
@@ -24,8 +24,8 @@ const App = () => {
             </Layout>
           </CategoryProvider>
         </TierProvider>
-      </AuthProvider>
-    </Router>
+      </Router>
+    </AuthProvider>
   );
 };
 

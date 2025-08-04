@@ -1,36 +1,74 @@
-// src/contexts/Auth/AuthProvider.jsx
-import { useState } from "react";
-import AuthContext from "../contexts/AuthContext";
+// src/contexts/AuthProvider.jsx
+import React, { useState, useEffect } from 'react';
+import AuthContext from '../contexts/AuthContext';
 
-const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [token, setToken] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const login = (userData) => {
-    setUser(userData);
-    setIsAuthenticated(true);
-    if (isAuthenticated) {
-      setIsLoggedIn(true);
+  // Inizializza il context dal localStorage al mount
+  useEffect(() => {
+    console.log('AuthProvider: Inizializzazione...');
+    const savedToken = localStorage.getItem('accessToken');
+    if (savedToken) {
+      console.log('AuthProvider: Token trovato nel localStorage');
+      setToken(savedToken);
+      setIsAuthenticated(true);
+      // Opzionale: qui potresti fare una chiamata API per validare il token
+    }
+    setLoading(false);
+    console.log('AuthProvider: Inizializzazione completata');
+  }, []);
+
+  // Funzione di login
+  const login = async (accessToken) => {
+    try {
+      console.log('AuthProvider: Effettuando login con token:', accessToken);
+      
+      // Salva il token nel localStorage
+      localStorage.setItem('accessToken', accessToken);
+      
+      // Aggiorna lo stato
+      setToken(accessToken);
+      setIsAuthenticated(true);
+      
+      console.log('AuthProvider: Login completato, isAuthenticated:', true);
+      
+      return Promise.resolve();
+    } catch (error) {
+      console.error('AuthProvider: Errore durante il login:', error);
+      return Promise.reject(error);
     }
   };
 
+  // Funzione di logout
   const logout = () => {
+    console.log('AuthProvider: Effettuando logout...');
+    localStorage.removeItem('accessToken');
+    setToken(null);
     setUser(null);
     setIsAuthenticated(false);
-    setIsLoggedIn(false);
+    console.log('AuthProvider: Logout completato');
   };
 
+  // Il valore che verrà fornito ai componenti figli
   const contextValue = {
-    isAuthenticated,
-    isLoggedIn,
     user,
+    token,
+    isAuthenticated,
+    loading,
     login,
-    logout,
+    logout
   };
+
+  console.log('AuthProvider: Rendering con valore:', contextValue);
 
   return (
-    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={contextValue}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 

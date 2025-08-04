@@ -1,7 +1,14 @@
-// src/contexts/Auth/AuthContext.jsx
-import { createContext } from "react";
+// src/contexts/AuthContext.jsx
+import { createContext } from 'react';
 
-// Crea il contesto, ma non fornisce alcun valore qui
-const AuthContext = createContext();
+// Crea il context con valore di default
+const AuthContext = createContext({
+  user: null,
+  token: null,
+  isAuthenticated: false,
+  loading: true,
+  login: async () => {},
+  logout: () => {}
+});
 
 export default AuthContext;

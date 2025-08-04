@@ -1,17 +1,18 @@
+/* src/components/Layout/Layout.css */
 .layout {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 
 .header {
-  background-color: #3b82f6;
+  background-color: #2c3e50;
   color: white;
   padding: 1rem 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .container {
-  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
@@ -25,36 +26,95 @@
   font-weight: bold;
   color: white;
   text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.logo:hover {
+  color: #3498db;
 }
 
 .nav {
   display: flex;
-  gap: 1rem;
   align-items: center;
+  gap: 1rem;
 }
 
-.nav a {
+.auth-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-greeting {
+  color: #ecf0f1;
+  font-size: 0.9rem;
+}
+
+.auth-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.auth-link {
   color: white;
   text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
-.nav a:hover {
-  text-decoration: underline;
+.auth-link:hover {
+  background-color: #34495e;
 }
 
 .logout-button {
-  background: none;
-  border: none;
+  background-color: #e74c3c;
   color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
 }
 
 .logout-button:hover {
-  text-decoration: underline;
+  background-color: #c0392b;
+}
+
+.logout-button:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
 }
 
 .main {
   flex: 1;
   padding: 2rem 0;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.2rem;
+  color: #7f8c8d;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .nav {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .auth-section {
+    flex-direction: column;
+    text-align: center;
+  }
 }

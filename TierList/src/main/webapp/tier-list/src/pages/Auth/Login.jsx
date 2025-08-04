@@ -1,7 +1,7 @@
 // src/pages/Auth/Login.jsx
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import  AuthContext  from "../../contexts/AuthContext";
+import { useAuth } from "../../hooks/useAuth"; // Importa da hooks
 import { authApi } from "../../services/api";
 import "./Auth.css";
 
@@ -9,18 +9,42 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // Aggiungi stato loading
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext);
+  // Usa solo useAuth
+  const { login, isAuthenticated } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Previeni submit multipli
+    if (isLoading) return;
+    
+    setIsLoading(true);
+    setError("");
+    
     try {
+      console.log('Tentativo di login...');
       const response = await authApi.login(username, password);
-      login(response.accessToken); // Usa il metodo login dal context
-      navigate("/");
+      console.log('Risposta API ricevuta:', response);
+      
+      // Assicurati che la risposta contenga il token
+      if (!response.token) {
+        throw new Error("Token non ricevuto dal server");
+      }
+      
+      // Attendi che il login nel context sia completato
+      await login(response.token);
+      console.log('Context aggiornato, isAuthenticated:', isAuthenticated);
+      
+      // Navigazione con replace per evitare di tornare indietro
+      navigate("/", { replace: true });
+      
     } catch (err) {
-      console.log(err);
-      setError("Credenziali non valide");
+      console.error("Errore durante il login:", err);
+      setError(err.message || "Credenziali non valide");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -37,6 +61,7 @@ const Login = () => {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
+              disabled={isLoading}
             />
           </div>
           <div className="form-group">
@@ -46,10 +71,15 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              disabled={isLoading}
             />
           </div>
-          <button type="submit" className="auth-button">
-            Accedi
+          <button 
+            type="submit" 
+            className="auth-button"
+            disabled={isLoading}
+          >
+            {isLoading ? "Accesso in corso..." : "Accedi"}
           </button>
         </form>
         <div className="auth-footer">
