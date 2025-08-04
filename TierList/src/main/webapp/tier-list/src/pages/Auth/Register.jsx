@@ -6,20 +6,38 @@ import "./Auth.css";
 const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    setError("");
+
     try {
-      await authApi.register(username, password, "USER");
-      setRole("USER");
-      console.log(role)
-      navigate("/login");
+      const response = await authApi.register(username, password, "USER");
+
+      // Check if response exists and is successful
+      if (response.status === 'success') {
+        navigate("/login");
+      } else {
+        console.log(response);
+        console.log(response.status);
+        throw new Error(
+          "Registrazione completata ma risposta inattesa dal server"
+        );
+      }
     } catch (err) {
-      setError("Registrazione fallita: " + err.message);
-      console.log(err)
+      // Handle different error types
+      const errorMsg =
+        err.response?.data?.message ||
+        err.message ||
+        "Errore durante la registrazione";
+      setError(errorMsg);
+      console.error("Registration error:", err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -36,6 +54,7 @@ const Register = () => {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
+              disabled={isLoading}
             />
           </div>
           <div className="form-group">
@@ -45,10 +64,11 @@ const Register = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              disabled={isLoading}
             />
           </div>
-          <button type="submit" className="auth-button">
-            Registrati
+          <button type="submit" className="auth-button" disabled={isLoading}>
+            {isLoading ? "Registrazione in corso..." : "Registrati"}
           </button>
         </form>
         <div className="auth-footer">

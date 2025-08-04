@@ -11,9 +11,9 @@ import CategoryProvider from "./providers/CategoryProvider";
 const App = () => {
   return (
     <AuthProvider>
-      <Router>
+      <CategoryProvider>
         <TierProvider>
-          <CategoryProvider>
+          <Router>
             <Layout>
               <Routes>
                 <Route path="/" element={<Home />} />
@@ -22,9 +22,9 @@ const App = () => {
                 {/* Esempio di rotta protetta */}
               </Routes>
             </Layout>
-          </CategoryProvider>
+          </Router>
         </TierProvider>
-      </Router>
+      </CategoryProvider>
     </AuthProvider>
   );
 };

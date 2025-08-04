@@ -1,6 +1,11 @@
 import { createContext } from 'react';
 
-// Context per gestire i tier degli elementi
-const TierContext = createContext();
+const TierContext = createContext({
+  tiers: {},
+  moveElementInTier: () => {},
+  getOrderedElements: () => {},
+  resetTiers: () => {}, // Add reset functionality
+  exportTierList: () => {},
+});
 
 export default TierContext;
