@@ -110,6 +110,9 @@ public class AuthController {
         utenteRepository.save(nuovo);
 
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body("Registrazione completata con successo");
+                .body("{\n" + //
+                                        "  \"message\": \"Registrazione avvenuta con successo!\",\n" + //
+                                        "  \"status\": \"success\"\n" + //
+                                        "}");
     }
 }
